@@ -11,7 +11,7 @@ const catalog: Omit<Game, 'cost' | 'superCost'>[] = [
   {id:'gta',name:'GTA: Neon Streets',sub:'Noční město. Vlastní pravidla.',tag:'CLASSIC · 3 REELS',color:'#ff83b5',cols:3,rows:3,symbols:['🚘','💵','🏍️','🌴','📻','🍸','W','★'],paylines:5,type:'classic'},
   {id:'royal',name:'Velvet Royale',sub:'Luxusní salón plný královských výher',tag:'20 PAYLINES · HIGH SOCIETY',color:'#e7c47a',cols:5,rows:3,symbols:['👑','💎','♠️','🍸','🎭','🃏','W','🌟'],paylines:20,type:'lines'},
   {id:'wildwest',name:'Dust & Destiny',sub:'Zlatá horečka na Divokém západě',tag:'10 PAYLINES · WILD WEST',color:'#e99c62',cols:5,rows:3,symbols:['🤠','🌵','🐎','⭐','🪙','🔫','W','★'],paylines:10,type:'lines'},
-  {id:'pharaoh',name:'Pharaoh’s Fortune',sub:'Starověké zlato ukryté v písku',tag:'CLASSIC · 3 REELS',color:'#e6bd64',cols:3,rows:3,symbols:['👁️','🏺','🐈','𓂀','🪙','🔱','W','★'],paylines:5,type:'classic'},
+  {id:'pharaoh',name:'Zlatý Faraón',sub:'Noc nad Údolím králů',tag:'20 PAYLINES · EGYPTIAN GOLD',color:'#e6bd64',cols:5,rows:3,symbols:['A','K','Q','J','🪲','☥','W','📜'],paylines:20,type:'lines'},
   {id:'garden',name:'Moonlit Garden',sub:'Tajná zahrada rozkvétá o půlnoci',tag:'20 PAYLINES · MOON MAGIC',color:'#bb94ff',cols:5,rows:3,symbols:['🌙','🦋','🌸','🍄','✨','🪷','W','★'],paylines:20,type:'lines'},
   {id:'westside',name:'West Side Gang',sub:'Velké město. Vysoké sázky. Vlastní legendy.',tag:'20 PAYLINES · CITY NIGHTS',color:'#bc8b5a',cols:5,rows:3,symbols:['🕴️','🚕','🃏','💎','🥃','🌃','W','★'],paylines:20,type:'lines'},
   {id:'zeus',name:'Zeus vs Hades',sub:'Blesk olympský, oheň podsvětí.',tag:'20 PAYLINES · GODS OF OLYMPUS',color:'#c9a45e',cols:5,rows:3,symbols:['⚡','🔱','🏛️','🦅','🔥','💀','W','★'],paylines:20,type:'lines'},

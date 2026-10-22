@@ -21,6 +21,7 @@ export async function socialRequest(body:Record<string,unknown>,admin=false){
   const endpoint=new URL(admin?'/api/admin':'/api/social',base).toString();
   const crossOrigin=new URL(endpoint).origin!==location.origin;
   const headers:Record<string,string>={'Content-Type':'application/json'};
-  if(crossOrigin){headers['X-Santy-Client']='pages';try{const saved=localStorage.getItem(key);if(saved)headers.Authorization='Bearer '+saved;}catch{throw Error('Povol úložiště účtu v prohlížeči.');}}
-  const r=await fetch(endpoint,{method:'POST',headers,credentials:crossOrigin?(admin?'include':'omit'):'same-origin',body:JSON.stringify(body)});const data:any=await r.json();if(!r.ok)throw Error(data.error||'Server není dostupný.');return data;
+  if(crossOrigin)headers['X-Santy-Client']='pages';
+  if(admin){try{const saved=sessionStorage.getItem('santyslots:admin-session');if(saved)headers.Authorization='Bearer '+saved;}catch{/* The secure cookie remains available when session storage is disabled. */}}else if(crossOrigin){try{const saved=localStorage.getItem(key);if(saved)headers.Authorization='Bearer '+saved;}catch{throw Error('Povol úložiště webu v prohlížeči.');}}
+  const r=await fetch(endpoint,{method:'POST',headers,credentials:crossOrigin?(admin?'include':'omit'):'same-origin',body:JSON.stringify(body)});const data:any=await r.json();if(!r.ok)throw Error(data.error||'Server není dostupný.');if(admin&&body.action==='login'&&data.token){try{sessionStorage.setItem('santyslots:admin-session',data.token)}catch{}}if(admin&&body.action==='logout'){try{sessionStorage.removeItem('santyslots:admin-session')}catch{}}return data;
 }
