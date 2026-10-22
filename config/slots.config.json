@@ -4,7 +4,7 @@
   "maxWinMultiplier": 5000,
   "maxCascades": 12,
   "maxPositionMultiplier": 64,
-  "winChancePercent": 30,
+  "winChancePercent": 24,
   "bonus": { "triggerScatters": 3, "freeSpins": 10, "superFreeSpins": 15, "retriggerSpins": 5, "maxRemainingSpins": 50 },
   "miniGame": { "rounds": 8, "perfectReward": 30, "goodReward": 15, "periodMs": 2600, "roundTimeoutMs": 10000, "perfectRadius": 0.065, "goodRadius": 0.17 },
   "games": {
@@ -16,6 +16,8 @@
     "royal": { "scatterChancePercent": 1.8, "bonusScatterChancePercent": 2.5, "wildChancePercent": 7, "symbolWeights": [8, 11, 14, 17, 21, 25, 0], "bonusBuyMultiplier": 85, "superBuyMultiplier": 255, "baseWildMultiplier": 2, "bonusWildMultiplier": 4, "classicPayouts": [28, 20, 14, 9, 5, 3, 45], "paylines": 20 },
     "wildwest": { "scatterChancePercent": 2, "bonusScatterChancePercent": 3, "wildChancePercent": 7, "symbolWeights": [8, 12, 15, 18, 21, 22, 0], "bonusBuyMultiplier": 75, "superBuyMultiplier": 225, "baseWildMultiplier": 1, "bonusWildMultiplier": 3, "classicPayouts": [24, 17, 12, 8, 5, 3, 38], "paylines": 10 },
     "pharaoh": { "scatterChancePercent": 3, "bonusScatterChancePercent": 4, "wildChancePercent": 5, "symbolWeights": [7, 11, 14, 18, 22, 24, 0], "bonusBuyMultiplier": 70, "superBuyMultiplier": 210, "baseWildMultiplier": 1, "bonusWildMultiplier": 3, "classicPayouts": [32, 22, 15, 10, 6, 3, 55], "paylines": 5 },
-    "garden": { "scatterChancePercent": 2, "bonusScatterChancePercent": 3, "wildChancePercent": 8, "symbolWeights": [10, 12, 15, 17, 19, 23, 0], "bonusBuyMultiplier": 80, "superBuyMultiplier": 240, "baseWildMultiplier": 2, "bonusWildMultiplier": 5, "classicPayouts": [26, 18, 13, 8, 5, 3, 42], "paylines": 20 }
+    "garden": { "scatterChancePercent": 2, "bonusScatterChancePercent": 3, "wildChancePercent": 8, "symbolWeights": [10, 12, 15, 17, 19, 23, 0], "bonusBuyMultiplier": 80, "superBuyMultiplier": 240, "baseWildMultiplier": 2, "bonusWildMultiplier": 5, "classicPayouts": [26, 18, 13, 8, 5, 3, 42], "paylines": 20 },
+    "westside": { "scatterChancePercent": 2, "bonusScatterChancePercent": 3, "wildChancePercent": 6, "symbolWeights": [10, 12, 15, 17, 20, 26, 0], "bonusBuyMultiplier": 75, "superBuyMultiplier": 225, "baseWildMultiplier": 1, "bonusWildMultiplier": 3, "classicPayouts": [28, 19, 14, 9, 5, 3, 45], "paylines": 20 },
+    "zeus": { "scatterChancePercent": 2.5, "bonusScatterChancePercent": 3.5, "wildChancePercent": 7, "symbolWeights": [9, 12, 14, 17, 21, 27, 0], "bonusBuyMultiplier": 90, "superBuyMultiplier": 270, "baseWildMultiplier": 2, "bonusWildMultiplier": 5, "classicPayouts": [32, 21, 15, 10, 6, 3, 52], "paylines": 20 }
   }
 }

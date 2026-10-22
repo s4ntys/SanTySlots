@@ -15,6 +15,7 @@
       "when": 1792626122153,
       "tag": "0001_little_rachel_grey",
       "breakpoints": true
-    }
+    },
+    { "idx": 2, "version": "6", "when": 1792627000000, "tag": "0002_casino_community", "breakpoints": true }
   ]
 }

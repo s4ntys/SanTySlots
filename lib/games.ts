@@ -13,6 +13,8 @@ const catalog: Omit<Game, 'cost' | 'superCost'>[] = [
   {id:'wildwest',name:'Dust & Destiny',sub:'Zlatá horečka na Divokém západě',tag:'10 PAYLINES · WILD WEST',color:'#e99c62',cols:5,rows:3,symbols:['🤠','🌵','🐎','⭐','🪙','🔫','W','★'],paylines:10,type:'lines'},
   {id:'pharaoh',name:'Pharaoh’s Fortune',sub:'Starověké zlato ukryté v písku',tag:'CLASSIC · 3 REELS',color:'#e6bd64',cols:3,rows:3,symbols:['👁️','🏺','🐈','𓂀','🪙','🔱','W','★'],paylines:5,type:'classic'},
   {id:'garden',name:'Moonlit Garden',sub:'Tajná zahrada rozkvétá o půlnoci',tag:'20 PAYLINES · MOON MAGIC',color:'#bb94ff',cols:5,rows:3,symbols:['🌙','🦋','🌸','🍄','✨','🪷','W','★'],paylines:20,type:'lines'},
+  {id:'westside',name:'West Side Gang',sub:'Velké město. Vysoké sázky. Vlastní legendy.',tag:'20 PAYLINES · CITY NIGHTS',color:'#bc8b5a',cols:5,rows:3,symbols:['🕴️','🚕','🃏','💎','🥃','🌃','W','★'],paylines:20,type:'lines'},
+  {id:'zeus',name:'Zeus vs Hades',sub:'Blesk olympský, oheň podsvětí.',tag:'20 PAYLINES · GODS OF OLYMPUS',color:'#c9a45e',cols:5,rows:3,symbols:['⚡','🔱','🏛️','🦅','🔥','💀','W','★'],paylines:20,type:'lines'},
 ];
 export const games: Game[] = catalog.map(g => ({...g,cost:config.games[g.id].bonusBuyMultiplier,superCost:config.games[g.id].superBuyMultiplier}));
 export interface Bonus { game: GameId; bet: number; left: number; super: boolean; total: number; mult: number[] }
@@ -81,6 +83,13 @@ export function outcome(gameId: string, bet: number, bonus: Bonus|null, rng = ra
   let board:number[]=[];
   for(let i=0;i<g.cols*g.rows;i++){const row=Math.floor(i/g.cols),col=i%g.cols;const neighbors=[col>0?i-1:-1,row>0&&col>0?i-g.cols-1:-1,row>0?i-g.cols:-1,row>0&&col<g.cols-1?i-g.cols+1:-1].filter(n=>n>=0).map(n=>board[n]);let symbol=baseSymbol();for(let tries=0;neighbors.includes(symbol)&&tries<20;tries++)symbol=baseSymbol();if(neighbors.includes(symbol))symbol=[0,1,2,3,4,5].find(x=>!neighbors.includes(x))??0;board.push(symbol);}
   const forceWin=rng(100)<config.winChancePercent;
+  if(!bonus&&!forceWin){
+    if(g.type==='cluster'){
+      for(let i=0;i<board.length;i++)board[i]=(Math.floor(i/g.cols)+i%g.cols)%2;
+    } else {
+      for(let i=0;i<board.length;i++)board[i]=i%g.cols;
+    }
+  }
   if(forceWin&&g.type==='cluster'){for(const i of [0,1,2,g.cols+2,g.cols+3])board[i]=0;}
   else if(forceWin){const path=g.type==='classic'?classicLines[0]:standardLines[0];for(let c=0;c<(g.type==='classic'?3:4);c++)board[path[c]*g.cols+c]=5;}
   const protectedCells=new Set(g.type==='cluster'&&forceWin?[0,1,2,g.cols+2,g.cols+3]:g.type==='cluster'?[]:(g.type==='classic'?classicLines[0]:standardLines[0]).slice(0,g.type==='classic'?3:4).map((r,c)=>r*g.cols+c));
