@@ -1,5 +1,7 @@
 # SanTySlots
 
+Zahraj si na [santyslots.zubajsamuel.workers.dev](https://santyslots.zubajsamuel.workers.dev/).
+
 Česká arkádová aplikace se třemi vlastními automaty, nulovým startovním zůstatkem, minihrou Crystal Catch, nákupem bonusu, free spiny, turbo režimem, automatickou hrou a společným žebříčkem.
 
 ## Technologie
