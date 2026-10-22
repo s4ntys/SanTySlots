@@ -10,6 +10,9 @@ Node.js 22.13+ a pnpm. `pnpm install`, `pnpm build`, první lokální migrace:
 `node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0000_young_legion.sql`
 Poté `pnpm start`. Lokální data a produkční data jsou oddělená.
 
+## Nasazení na Cloudflare
+Produkční web běží jako Cloudflare Worker a používá D1 databázi. V Cloudflare nastav `SANTYSLOTS_D1_ID` na UUID databáze `santyslots-db` a spusť `pnpm deploy`. Příkaz sestaví aplikaci a publikuje server i statické soubory. D1 schéma tvoří migrace v `drizzle/`.
+
 ## Soubory
 - app/page.tsx: lobby, automaty, minihra, dialogy
 - app/globals.css: responzivní vzhled a vlastní vektorové motivy
