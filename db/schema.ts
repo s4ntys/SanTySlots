@@ -1,3 +1,3 @@
-import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, integer, index } from 'drizzle-orm/sqlite-core';
 export const players = sqliteTable('players', { id: text('id').primaryKey(), name: text('name').notNull(), balance: integer('balance').notNull().default(0), version: integer('version').notNull().default(0), state: text('state').notNull().default('{}') });
-export const wins = sqliteTable('wins', { id: text('id').primaryKey(), player: text('player').notNull(), name: text('name').notNull(), game: text('game').notNull(), amount: integer('amount').notNull(), bet: integer('bet').notNull(), created: integer('created').notNull() });
+export const wins = sqliteTable('wins', { id: text('id').primaryKey(), player: text('player').notNull(), name: text('name').notNull(), game: text('game').notNull(), amount: integer('amount').notNull(), bet: integer('bet').notNull(), created: integer('created').notNull() }, table => [index('wins_amount_created').on(table.amount,table.created),index('wins_created').on(table.created)]);

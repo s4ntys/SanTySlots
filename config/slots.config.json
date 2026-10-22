@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "bets": [1, 2, 5, 10, 20, 50],
+  "maxWinMultiplier": 5000,
+  "maxCascades": 12,
+  "maxPositionMultiplier": 64,
+  "bonus": { "triggerScatters": 3, "freeSpins": 10, "superFreeSpins": 15, "retriggerSpins": 5, "maxRemainingSpins": 50 },
+  "miniGame": { "rounds": 8, "perfectReward": 30, "goodReward": 15, "periodMs": 2600, "roundTimeoutMs": 10000, "perfectRadius": 0.065, "goodRadius": 0.17 },
+  "games": {
+    "crystal": { "scatterChancePercent": 1.5, "bonusScatterChancePercent": 2.2, "wildChancePercent": 0, "symbolWeights": [12, 14, 15, 16, 18, 20, 22], "bonusBuyMultiplier": 80, "superBuyMultiplier": 240, "baseWildMultiplier": 1, "bonusWildMultiplier": 1, "classicPayouts": [12, 10, 8, 6, 4, 3, 20] },
+    "ocean": { "scatterChancePercent": 1.5, "bonusScatterChancePercent": 2.2, "wildChancePercent": 8, "symbolWeights": [12, 14, 15, 16, 18, 20, 0], "bonusBuyMultiplier": 70, "superBuyMultiplier": 210, "baseWildMultiplier": 1, "bonusWildMultiplier": 1, "classicPayouts": [12, 10, 8, 6, 4, 3, 20] },
+    "cosmic": { "scatterChancePercent": 1.5, "bonusScatterChancePercent": 2.2, "wildChancePercent": 8, "symbolWeights": [12, 14, 15, 16, 18, 20, 0], "bonusBuyMultiplier": 90, "superBuyMultiplier": 270, "baseWildMultiplier": 2, "bonusWildMultiplier": 5, "classicPayouts": [12, 10, 8, 6, 4, 3, 20] },
+    "gaming": { "scatterChancePercent": 3, "bonusScatterChancePercent": 3.5, "wildChancePercent": 6, "symbolWeights": [8, 10, 14, 18, 22, 26, 0], "bonusBuyMultiplier": 60, "superBuyMultiplier": 180, "baseWildMultiplier": 1, "bonusWildMultiplier": 2, "classicPayouts": [25, 18, 12, 8, 5, 3, 40] },
+    "gta": { "scatterChancePercent": 3, "bonusScatterChancePercent": 3.5, "wildChancePercent": 5, "symbolWeights": [7, 11, 14, 19, 23, 26, 0], "bonusBuyMultiplier": 65, "superBuyMultiplier": 195, "baseWildMultiplier": 1, "bonusWildMultiplier": 3, "classicPayouts": [30, 20, 14, 9, 5, 3, 50] }
+  }
+}
