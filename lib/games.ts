@@ -4,12 +4,12 @@ export const bets = config.bets;
 export type GameId = keyof typeof config.games;
 export interface Game { id: GameId; name: string; sub: string; tag: string; color: string; cols: number; rows: number; cost: number; superCost: number; symbols: string[]; paylines: number; type: 'cluster' | 'lines' | 'classic' }
 const catalog: Omit<Game, 'cost' | 'superCost'>[] = [
-  {id:'crystal',name:'Crystal Forge',sub:'Tajemství zářící hlubiny',tag:'CLUSTER PAYS',color:'#a595ff',cols:7,rows:7,symbols:['◆','⬟','✦','⬢','●','▲','✿','★'],paylines:0,type:'cluster'},
-  {id:'ocean',name:'Abyss Hunters',sub:'Poklady pod hladinou',tag:'COLLECT BONUS',color:'#62dfdd',cols:5,rows:3,symbols:['◆','⚓','✦','⬡','●','▲','◈','★'],paylines:10,type:'lines'},
-  {id:'cosmic',name:'Nova Raiders',sub:'Výprava za hranice galaxie',tag:'WILD MULTIPLIERS',color:'#ffb77d',cols:5,rows:3,symbols:['◆','☄','✦','⬡','●','▲','✧','★'],paylines:10,type:'lines'},
+  {id:'crystal',name:'Crystal Forge',sub:'Tajemství zářící hlubiny',tag:'CLUSTER PAYS',color:'#a595ff',cols:7,rows:7,symbols:['💎','🔮','✨','🌙','💠','🪄','🦋','🌟'],paylines:0,type:'cluster'},
+  {id:'ocean',name:'Abyss Hunters',sub:'Poklady pod hladinou',tag:'COLLECT BONUS',color:'#62dfdd',cols:5,rows:3,symbols:['🐚','⚓','🪸','🐠','🌊','🐬','🧜','🫧'],paylines:10,type:'lines'},
+  {id:'cosmic',name:'Nova Raiders',sub:'Výprava za hranice galaxie',tag:'WILD MULTIPLIERS',color:'#ffb77d',cols:5,rows:3,symbols:['🪐','☄️','🌟','🌌','🌙','🚀','👾','💫'],paylines:10,type:'lines'},
   {id:'gaming',name:'Pixel Arcade',sub:'Level up. Roztoč další level.',tag:'CLASSIC · 3 REELS',color:'#92f889',cols:3,rows:3,symbols:['👑','🎮','💎','🕹️','⚡','♥','W','★'],paylines:5,type:'classic'},
   {id:'gta',name:'GTA: Neon Streets',sub:'Noční město. Vlastní pravidla.',tag:'CLASSIC · 3 REELS',color:'#ff83b5',cols:3,rows:3,symbols:['🚘','💵','🏍️','🌴','📻','🍸','W','★'],paylines:5,type:'classic'},
-  {id:'royal',name:'Velvet Royale',sub:'Luxusní salón plný královských výher',tag:'20 PAYLINES · HIGH SOCIETY',color:'#e7c47a',cols:5,rows:3,symbols:['👑','💎','♠️','🍸','🎭','🃏','W','★'],paylines:20,type:'lines'},
+  {id:'royal',name:'Velvet Royale',sub:'Luxusní salón plný královských výher',tag:'20 PAYLINES · HIGH SOCIETY',color:'#e7c47a',cols:5,rows:3,symbols:['👑','💎','♠️','🍸','🎭','🃏','W','🌟'],paylines:20,type:'lines'},
   {id:'wildwest',name:'Dust & Destiny',sub:'Zlatá horečka na Divokém západě',tag:'10 PAYLINES · WILD WEST',color:'#e99c62',cols:5,rows:3,symbols:['🤠','🌵','🐎','⭐','🪙','🔫','W','★'],paylines:10,type:'lines'},
   {id:'pharaoh',name:'Pharaoh’s Fortune',sub:'Starověké zlato ukryté v písku',tag:'CLASSIC · 3 REELS',color:'#e6bd64',cols:3,rows:3,symbols:['👁️','🏺','🐈','𓂀','🪙','🔱','W','★'],paylines:5,type:'classic'},
   {id:'garden',name:'Moonlit Garden',sub:'Tajná zahrada rozkvétá o půlnoci',tag:'20 PAYLINES · MOON MAGIC',color:'#bb94ff',cols:5,rows:3,symbols:['🌙','🦋','🌸','🍄','✨','🪷','W','★'],paylines:20,type:'lines'},
@@ -76,13 +76,13 @@ export function evaluateLines(g: Game, board: number[], bet: number, bonus: Bonu
   if(g.id==='ocean'&&bonus&&board.includes(6)){total+=bet*board.filter(x=>x===0).length*(bonus.super?8:3);board.forEach((x,i)=>{if(x===0||x===6)hits.add(i);});}
   return {total,hits:[...hits],lines:winningLines};
 }
-export function outcome(gameId: string, bet: number, bonus: Bonus|null, rng = random): Outcome {
+export function outcome(gameId: string, bet: number, bonus: Bonus|null, rng = random, winChancePercent = config.winChancePercent): Outcome {
   const g=games.find(x=>x.id===gameId);if(!g||!Number.isSafeInteger(bet)||bet<=0)throw Error('Neplatná hra nebo sázka.');
   const draw=()=>drawSymbol(g.id,!!bonus,rng);const weights=config.games[g.id].symbolWeights.slice(0,6),weightTotal=weights.reduce((a,b)=>a+b,0);
   const baseSymbol=()=>{let roll=rng(1000000)/1000000*weightTotal;for(let i=0;i<weights.length;i++){roll-=weights[i];if(roll<0)return i;}return 5;};
   let board:number[]=[];
   for(let i=0;i<g.cols*g.rows;i++){const row=Math.floor(i/g.cols),col=i%g.cols;const neighbors=[col>0?i-1:-1,row>0&&col>0?i-g.cols-1:-1,row>0?i-g.cols:-1,row>0&&col<g.cols-1?i-g.cols+1:-1].filter(n=>n>=0).map(n=>board[n]);let symbol=baseSymbol();for(let tries=0;neighbors.includes(symbol)&&tries<20;tries++)symbol=baseSymbol();if(neighbors.includes(symbol))symbol=[0,1,2,3,4,5].find(x=>!neighbors.includes(x))??0;board.push(symbol);}
-  const forceWin=rng(100)<config.winChancePercent;
+  const forceWin=rng(100)<Math.max(0,Math.min(100,winChancePercent));
   if(!bonus&&!forceWin){
     if(g.type==='cluster'){
       for(let i=0;i<board.length;i++)board[i]=(Math.floor(i/g.cols)+i%g.cols)%2;
